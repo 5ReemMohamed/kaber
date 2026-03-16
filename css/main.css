@@ -205,7 +205,7 @@ h1 {
 }
 
 @media screen and (min-width:668px) {
-    html[dir="rtl"] .content::before {
+    html[dir="rtl"] header .content::before {
         font-size: 150px;
         left: 8%;
         top: 5%;
@@ -224,7 +224,7 @@ h1 {
         font-size: 1.25rem;
     }
 
-    html[dir="rtl"] .content::before {
+    html[dir="rtl"] header .content::before {
         font-size: 170px;
         left: 28%;
     }
