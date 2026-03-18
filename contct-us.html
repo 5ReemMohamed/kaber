@@ -147,7 +147,7 @@
 
 
     <section class="section-padding contact-info" id="contact">
-        <div class="container">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row g-4 box pb-3 my-4 justify-content-center align-items-center">
                 <div class="col-lg-4">
                     <div class="inner d-flex gap-3 justify-content-center">
@@ -203,7 +203,7 @@
     </section>
     <section class="contact-faq-section">
         <div class="container-fluid">
-            <div class="row gx-4 align-items-start">
+            <div class="row gx-4 align-items-start" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-6 form-col">
                     <div class="contact-box my-4">
 
@@ -213,26 +213,32 @@
                         <form>
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control custom-input" placeholder="الاسم">
+                                    <input type="text" class="form-control custom-input" placeholder="الاسم" id="name">
+                                    <p class="error-msg text-danger small"></p>
                                 </div>
 
                                 <div class="col-md-6">
                                     <input type="email" class="form-control custom-input"
-                                        placeholder="البريد الإلكتروني">
+                                        placeholder="البريد الإلكتروني" id="email">
+                                    <p class="error-msg text-danger small"></p>
                                 </div>
 
                                 <div class="col-md-6">
                                     <input type="tel" dir="rtl" class="form-control custom-input"
-                                        placeholder="رقم الهاتف">
+                                        placeholder="رقم الهاتف" id="phone">
+                                    <p class="error-msg text-danger small"></p>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control custom-input" placeholder="العنوان">
+                                    <input type="text" class="form-control custom-input" placeholder="العنوان"
+                                        id="address">
+                                    <p class="error-msg text-danger small"></p>
                                 </div>
 
                                 <div class="col-12">
-                                    <textarea class="form-control custom-input" rows="4"
-                                        placeholder="اكتب رسالتك"></textarea>
+                                    <textarea class="form-control custom-input" rows="4" placeholder="اكتب رسالتك"
+                                        id="message"></textarea>
+                                    <p class="error-msg text-danger small"></p>
                                 </div>
 
                                 <div class="col-12">
@@ -322,6 +328,7 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">

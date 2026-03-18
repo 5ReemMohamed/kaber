@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector(".navbar");
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     const navbarCollapse = document.getElementById('navbarSupportedContent');
-
-    // scroll effect
     window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
             navbar.classList.add("scrolled");
@@ -58,30 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     const swiper = new Swiper(".testimonialSwiper", {
 
-        // عدد الكروت
         slidesPerView: 3,
         spaceBetween: 30,
-
-        // loop infinite
         loop: true,
-
-        // autoplay
         autoplay: {
             delay: 2500,
             disableOnInteraction: false,
             pauseOnMouseEnter: true
         },
-
-        // grab cursor
         grabCursor: true,
-
-        // drag by mouse
         simulateTouch: true,
-
-        // smooth speed
         speed: 900,
-
-        // responsive
         breakpoints: {
 
             0: {
@@ -137,6 +122,87 @@ document.addEventListener('DOMContentLoaded', function () {
             behavior: "smooth"
         });
 
+    });
+    const form = document.querySelector("form");
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const address = document.getElementById("address");
+    const message = document.getElementById("message");
+    const inputs = [name, email, phone, address, message];
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{9,15}$/;
+    function validateInput(input, type = "text") {
+        const error = input.nextElementSibling;
+
+        input.classList.remove("valid", "invalid");
+
+        if (input.value.trim() === "") {
+            error.textContent = "هذا الحقل مطلوب";
+            input.classList.add("invalid");
+            return false;
+        }
+
+        if (type === "email" && !emailRegex.test(input.value)) {
+            error.textContent = "البريد الإلكتروني غير صحيح";
+            input.classList.add("invalid");
+            return false;
+        }
+
+        if (type === "phone" && !phoneRegex.test(input.value)) {
+            error.textContent = "رقم الهاتف غير صحيح";
+            input.classList.add("invalid");
+            return false;
+        }
+        error.textContent = "";
+        input.classList.add("valid");
+        return true;
+    }
+    name.addEventListener("input", () => validateInput(name));
+    address.addEventListener("input", () => validateInput(address));
+    message.addEventListener("input", () => validateInput(message));
+
+    email.addEventListener("input", () => validateInput(email, "email"));
+    phone.addEventListener("input", () => validateInput(phone, "phone"));
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        if (!validateInput(name)) isValid = false;
+        if (!validateInput(email, "email")) isValid = false;
+        if (!validateInput(phone, "phone")) isValid = false;
+        if (!validateInput(address)) isValid = false;
+        if (!validateInput(message)) isValid = false;
+
+        if (isValid) {
+
+            Swal.fire({
+                icon: "success",
+                title: "تم الإرسال",
+                text: "تم إرسال رسالتك بنجاح",
+                confirmButtonText: "حسناً"
+            }).then(() => {
+
+                let whatsappMessage =
+                    `الاسم: ${name.value}
+البريد الإلكتروني: ${email.value}
+رقم الهاتف: ${phone.value}
+العنوان: ${address.value}
+الرسالة: ${message.value}`;
+
+                let encodedMessage = encodeURIComponent(whatsappMessage);
+
+                window.open(`https://wa.me/966541683466?text=${encodedMessage}`, "_blank");
+
+                form.reset();
+                inputs.forEach(input => {
+                    input.classList.remove("valid", "invalid");
+                    input.nextElementSibling.textContent = "";
+                });
+            });
+        }
     });
     AOS.init({ offset: 120, duration: 1000, easing: 'ease-in-out' });
 });
